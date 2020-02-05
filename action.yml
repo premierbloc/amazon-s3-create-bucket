@@ -1,26 +1,17 @@
 name: Amazon S3 "Create Bucket" Action for GitHub Actions
 
-description: 'Create an Amazon S3 bucket based on Github repository'
+description: 'Create an Amazon S3 bucket'
 
 inputs:
-  aws-access-key-id:
-    description: 'AWS Access Key ID'
-    required: true
-  aws-secret-access-key:
-    description: 'AWS Secret Access Key'
-    required: true
-  aws-region:
-    description: 'AWS Region, e.g. us-east-2'
-    required: true
+  bucket:
+    default: 'aws-cloudformation-managed-sourcebucket'
+    description: 'Optional bucket name override'
+    required: false
 
 outputs:
   bucket:
-    description: 'The name of the Amazon S3 bucket'
+    description: ''
 
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.aws-access-key-id }}
-    - ${{ inputs.aws-secret-access-key }}
-    - ${{ inputs.aws-region }}
+  using: 'node12'
+  main: 'index.js'
